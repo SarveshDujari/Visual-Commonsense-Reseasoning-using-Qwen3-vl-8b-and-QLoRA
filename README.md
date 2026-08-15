@@ -62,8 +62,6 @@ Each notebook was designed to answer a specific question before moving to the ne
 | `01_visual_impact`       | Should the model use raw images, boxes or crops? | Raw images performed best              |
 | `02_prompt_impact`       | Can better instructions improve reasoning?       | Guided prompt reached 64%              |
 | `03_model_impact`        | Which Qwen-VL model gives the best trade-off?    | Qwen3-VL-8B reached 53% joint accuracy |
-| `qlora_impact_failed`    | Does the first fine-tuning recipe work?          | No, training produced NaNs             |
-| `qlora_impact_qwen3vl8b` | Can the training recipe be stabilized?           | Stable QLoRA pipeline                  |
 | `memory-safe v3, 100 Q`  | Is the rebuilt training loop stable?             | 40% → 41% joint accuracy               |
 | `memory-safe v3, 500 Q`  | Does additional data help?                       | 50% joint accuracy                     |
 | `memory-safe v3, 1000 Q` | Does scaling training further help?              | 54% joint accuracy                     |
@@ -170,7 +168,8 @@ The final evaluation was performed on a random 1,000-question sample.
 | QA → R       |          65% |  65% |  72% | **77%** |
 | Joint Q → AR |          40% |  41% |  50% | **54%** |
 
-### Final Performance
+### Final Performance 
+(on a 1000 question sample subset from validation dataset)
 
 **Q → A:** 73.9%
 **QA → R:** 72.1%
