@@ -252,9 +252,6 @@ A separate language model could verify whether the selected rationale actually s
 ### Project Interface
 
 ![Project Interface](Images/Frontend_Image1.png)
-
-### Project Interface
-
 ![Project Interface](Images/Frontend_Image2.png)
 
 ---
