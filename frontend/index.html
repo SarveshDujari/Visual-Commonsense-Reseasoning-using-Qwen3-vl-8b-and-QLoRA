@@ -1,0 +1,1343 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VCR AI</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter, Arial, sans-serif;
+            background: #f5f7fb;
+            color: #17191c;
+        }
+
+        /* =====================================================
+           HEADER
+           ===================================================== */
+
+        header {
+            background: #111318;
+            color: white;
+            padding: 28px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 32px;
+            letter-spacing: -0.5px;
+        }
+
+        header p {
+            margin: 8px 0 0;
+            color: #aeb4c0;
+            font-size: 14px;
+        }
+
+
+        /* =====================================================
+           MAIN
+           ===================================================== */
+
+        .container {
+            max-width: 1050px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+
+        /* =====================================================
+           CARD
+           ===================================================== */
+
+        .card {
+            background: white;
+            border: 1px solid #e2e5ea;
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 22px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.04);
+        }
+
+
+        /* =====================================================
+           SECTION HEADER
+           ===================================================== */
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            margin-bottom: 25px;
+        }
+
+        .step {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #111318;
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .section-header h2 {
+            margin: 0;
+            font-size: 21px;
+        }
+
+        .section-header span {
+            display: block;
+            color: #737984;
+            font-size: 13px;
+            margin-top: 3px;
+        }
+
+
+        /* =====================================================
+           FORM
+           ===================================================== */
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        textarea,
+        input[type="text"] {
+            width: 100%;
+            padding: 13px 14px;
+
+            border: 1px solid #d9dde4;
+            border-radius: 9px;
+
+            font-family: inherit;
+            font-size: 14px;
+
+            outline: none;
+            transition: 0.2s;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 95px;
+        }
+
+        textarea:focus,
+        input:focus {
+            border-color: #111318;
+            box-shadow: 0 0 0 3px rgba(17, 19, 24, 0.07);
+        }
+
+        .field {
+            margin-bottom: 20px;
+        }
+
+
+        /* =====================================================
+           UPLOAD
+           ===================================================== */
+
+        .upload-area {
+            border: 2px dashed #d8dce3;
+            border-radius: 12px;
+            padding: 22px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .upload-area:hover {
+            border-color: #111318;
+            background: #fafafa;
+        }
+
+        .upload-icon {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .upload-text {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .upload-subtext {
+            font-size: 12px;
+            color: #858b96;
+            margin-top: 5px;
+        }
+
+        #image {
+            display: none;
+        }
+
+
+        /* =====================================================
+           IMAGE PREVIEW
+           ===================================================== */
+
+        #preview-container {
+            display: none;
+            margin-top: 18px;
+            text-align: center;
+        }
+
+        #preview {
+            max-width: 100%;
+            max-height: 420px;
+            border-radius: 12px;
+            border: 1px solid #e0e3e8;
+        }
+
+
+        /* =====================================================
+           CHOICES
+           ===================================================== */
+
+        .choices-help {
+            color: #7b818c;
+            font-size: 12px;
+            margin-top: -5px;
+            margin-bottom: 10px;
+        }
+
+
+        /* =====================================================
+           BUTTON
+           ===================================================== */
+
+        button {
+            width: 100%;
+            border: none;
+            border-radius: 10px;
+
+            padding: 14px 20px;
+
+            background: #111318;
+            color: white;
+
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        button:hover:not(:disabled) {
+            background: #292c33;
+            transform: translateY(-1px);
+        }
+
+        button:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+        }
+
+
+        /* =====================================================
+           RESULT
+           ===================================================== */
+
+        .result {
+            display: none;
+
+            margin-top: 20px;
+            padding: 18px;
+
+            border-radius: 11px;
+            background: #f6f7f9;
+            border: 1px solid #e1e4e9;
+        }
+
+        .result-title {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #777d87;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .prediction {
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .raw-output {
+            margin-top: 12px;
+            color: #747a84;
+            font-size: 12px;
+        }
+
+
+        /* =====================================================
+           RATIONALE SECTION
+           ===================================================== */
+
+        #rationaleSection {
+            display: none;
+        }
+
+        .selected-answer {
+            background: #f1f3f5;
+            border-left: 4px solid #111318;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 22px;
+        }
+
+        .selected-answer-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #777d87;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .selected-answer-text {
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+
+        /* =====================================================
+           FINAL RESULT
+           ===================================================== */
+
+        #finalResult {
+            display: none;
+
+            background: #111318;
+            color: white;
+
+            border-radius: 16px;
+            padding: 28px;
+
+            margin-bottom: 30px;
+        }
+
+        #finalResult h2 {
+            margin-top: 0;
+        }
+
+        .final-row {
+            margin-top: 18px;
+        }
+
+        .final-label {
+            color: #aeb4c0;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .final-value {
+            margin-top: 5px;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+
+        /* =====================================================
+           FOOTER
+           ===================================================== */
+
+        footer {
+            text-align: center;
+            color: #8a909a;
+            font-size: 12px;
+            padding: 10px 20px 35px;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+           ===================================================== */
+
+        @media (max-width: 650px) {
+
+            .container {
+                margin-top: 20px;
+                padding: 0 12px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            header h1 {
+                font-size: 26px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     HEADER
+     ========================================================= -->
+
+<header>
+
+    <h1>🧠 VCR AI</h1>
+
+    <p>
+        Visual Commonsense Reasoning · Answer + Rationale
+    </p>
+
+</header>
+
+
+
+<div class="container">
+
+
+    <!-- =====================================================
+         STAGE 1
+         ===================================================== -->
+
+    <div class="card">
+
+        <div class="section-header">
+
+            <div class="step">
+                1
+            </div>
+
+            <div>
+
+                <h2>Answer Selection</h2>
+
+                <span>
+                    Analyze the image and select the best answer.
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- IMAGE -->
+
+        <div class="field">
+
+            <label>
+                Image
+            </label>
+
+            <label
+                class="upload-area"
+                for="image"
+            >
+
+                <div class="upload-icon">
+                    🖼️
+                </div>
+
+                <div class="upload-text">
+                    Click to upload an image
+                </div>
+
+                <div class="upload-subtext">
+                    PNG, JPG or JPEG
+                </div>
+
+            </label>
+
+            <input
+                type="file"
+                id="image"
+                accept="image/*"
+            >
+
+
+            <div id="preview-container">
+
+                <img
+                    id="preview"
+                    alt="Image preview"
+                >
+
+            </div>
+
+        </div>
+
+
+
+        <!-- QUESTION -->
+
+        <div class="field">
+
+            <label>
+                Question
+            </label>
+
+            <textarea
+                id="question"
+                placeholder="e.g. What is the person doing?"
+            ></textarea>
+
+        </div>
+
+
+
+        <!-- ANSWERS -->
+
+        <div class="field">
+
+            <label>
+                Answer Choices
+            </label>
+
+            <div class="choices-help">
+                Enter exactly 4 choices separated by |
+            </div>
+
+            <textarea
+                id="answers"
+                placeholder="Choice 1 | Choice 2 | Choice 3 | Choice 4"
+            ></textarea>
+
+        </div>
+
+
+
+        <button
+            id="answerButton"
+            onclick="predictAnswer()"
+        >
+            🧠 Analyze & Select Answer
+        </button>
+
+
+
+        <div
+            id="answerResult"
+            class="result"
+        >
+
+            <div class="result-title">
+                Model Prediction
+            </div>
+
+            <div
+                id="answerPrediction"
+                class="prediction"
+            ></div>
+
+            <div
+                id="answerRaw"
+                class="raw-output"
+            ></div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         STAGE 2
+         ===================================================== -->
+
+    <div
+        class="card"
+        id="rationaleSection"
+    >
+
+        <div class="section-header">
+
+            <div class="step">
+                2
+            </div>
+
+            <div>
+
+                <h2>Rationale Selection</h2>
+
+                <span>
+                    Choose the explanation that best supports the answer.
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- SELECTED ANSWER -->
+
+        <div class="selected-answer">
+
+            <div class="selected-answer-label">
+                Selected Answer
+            </div>
+
+            <div
+                id="selectedAnswer"
+                class="selected-answer-text"
+            ></div>
+
+        </div>
+
+
+
+        <!-- RATIONALES -->
+
+        <div class="field">
+
+            <label>
+                Rationale Choices
+            </label>
+
+            <div class="choices-help">
+                Enter exactly 4 rationale choices separated by |
+            </div>
+
+            <textarea
+                id="rationales"
+                placeholder="Rationale 1 | Rationale 2 | Rationale 3 | Rationale 4"
+            ></textarea>
+
+        </div>
+
+
+
+        <button
+            id="rationaleButton"
+            onclick="predictRationale()"
+        >
+            🔍 Analyze & Select Rationale
+        </button>
+
+
+
+        <div
+            id="rationaleResult"
+            class="result"
+        >
+
+            <div class="result-title">
+                Model Prediction
+            </div>
+
+            <div
+                id="rationalePrediction"
+                class="prediction"
+            ></div>
+
+            <div
+                id="rationaleRaw"
+                class="raw-output"
+            ></div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         FINAL RESULT
+         ===================================================== -->
+
+    <div id="finalResult">
+
+        <h2>
+            ✅ VCR Result
+        </h2>
+
+
+        <div class="final-row">
+
+            <div class="final-label">
+                Selected Answer
+            </div>
+
+            <div
+                id="finalAnswer"
+                class="final-value"
+            ></div>
+
+        </div>
+
+
+        <div class="final-row">
+
+            <div class="final-label">
+                Selected Rationale
+            </div>
+
+            <div
+                id="finalRationale"
+                class="final-value"
+            ></div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+<footer>
+
+    VCR AI · Visual Commonsense Reasoning
+
+</footer>
+
+
+
+<script>
+
+
+// ============================================================
+// GLOBAL STATE
+// ============================================================
+
+let selectedAnswerText = "";
+
+let selectedAnswerIndex = -1;
+
+let currentAnswers = [];
+
+
+
+// ============================================================
+// IMAGE PREVIEW
+// ============================================================
+
+const imageInput =
+    document.getElementById("image");
+
+
+imageInput.addEventListener(
+    "change",
+    function () {
+
+        const file =
+            this.files[0];
+
+        if (!file) {
+            return;
+        }
+
+
+        const preview =
+            document.getElementById("preview");
+
+
+        const container =
+            document.getElementById(
+                "preview-container"
+            );
+
+
+        preview.src =
+            URL.createObjectURL(file);
+
+
+        container.style.display =
+            "block";
+
+    }
+);
+
+
+
+// ============================================================
+// CHOICE PARSER
+// ============================================================
+
+function getChoices(text) {
+
+    return text
+        .split("|")
+        .map(x => x.trim())
+        .filter(x => x.length > 0);
+
+}
+
+
+
+// ============================================================
+// ANSWER PREDICTION
+// ============================================================
+
+async function predictAnswer() {
+
+    const image =
+        document.getElementById(
+            "image"
+        ).files[0];
+
+
+    const question =
+        document.getElementById(
+            "question"
+        ).value.trim();
+
+
+    const answersText =
+        document.getElementById(
+            "answers"
+        ).value.trim();
+
+
+    const result =
+        document.getElementById(
+            "answerResult"
+        );
+
+
+    const prediction =
+        document.getElementById(
+            "answerPrediction"
+        );
+
+
+    const raw =
+        document.getElementById(
+            "answerRaw"
+        );
+
+
+    const button =
+        document.getElementById(
+            "answerButton"
+        );
+
+
+    // --------------------------------------------------------
+    // VALIDATION
+    // --------------------------------------------------------
+
+    if (
+        !image ||
+        !question ||
+        !answersText
+    ) {
+
+        result.style.display =
+            "block";
+
+        prediction.innerText =
+            "⚠️ Missing information";
+
+        raw.innerText =
+            "Please provide image, question and answers.";
+
+        return;
+
+    }
+
+
+    const answers =
+        getChoices(
+            answersText
+        );
+
+
+    if (answers.length !== 4) {
+
+        result.style.display =
+            "block";
+
+        prediction.innerText =
+            "⚠️ Invalid choices";
+
+        raw.innerText =
+            "Please provide exactly 4 choices separated by |";
+
+        return;
+
+    }
+
+
+    currentAnswers =
+        answers;
+
+
+    // --------------------------------------------------------
+    // LOADING
+    // --------------------------------------------------------
+
+    button.disabled =
+        true;
+
+    button.innerText =
+        "⏳ Model is thinking...";
+
+
+    result.style.display =
+        "block";
+
+
+    prediction.innerText =
+        "Analyzing image...";
+
+
+    raw.innerText =
+        "The first inference may take some time.";
+
+
+    // Hide previous stages
+
+    document.getElementById(
+        "rationaleSection"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "finalResult"
+    ).style.display =
+        "none";
+
+
+    // --------------------------------------------------------
+    // FORM DATA
+    // --------------------------------------------------------
+
+    const formData =
+        new FormData();
+
+
+    formData.append(
+        "image",
+        image
+    );
+
+
+    formData.append(
+        "question",
+        question
+    );
+
+
+    formData.append(
+        "answers",
+        answers.join(" | ")
+    );
+
+
+    try {
+
+        const response =
+            await fetch(
+                "http://127.0.0.1:8000/predict-answer",
+                {
+                    method: "POST",
+                    body: formData
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                JSON.stringify(
+                    data
+                )
+            );
+
+        }
+
+
+        const index =
+            Number(
+                data.prediction
+            );
+
+
+        if (
+            index < 0 ||
+            index > 3
+        ) {
+
+            throw new Error(
+                "Model returned an invalid prediction."
+            );
+
+        }
+
+
+        selectedAnswerIndex =
+            index;
+
+
+        selectedAnswerText =
+            answers[index];
+
+
+        // ----------------------------------------------------
+        // DISPLAY ANSWER
+        // ----------------------------------------------------
+
+        prediction.innerText =
+            `${index}. ${selectedAnswerText}`;
+
+
+        raw.innerText =
+            `Raw model output: ${data.raw_output}`;
+
+
+        // ----------------------------------------------------
+        // SHOW RATIONALE
+        // ----------------------------------------------------
+
+        document.getElementById(
+            "selectedAnswer"
+        ).innerText =
+            `${index}. ${selectedAnswerText}`;
+
+
+        document.getElementById(
+            "rationaleSection"
+        ).style.display =
+            "block";
+
+
+        document.getElementById(
+            "rationaleSection"
+        ).scrollIntoView({
+            behavior: "smooth"
+        });
+
+    }
+
+
+    catch (error) {
+
+        prediction.innerText =
+            "❌ Prediction failed";
+
+
+        raw.innerText =
+            error.message;
+
+
+        console.error(error);
+
+    }
+
+
+    finally {
+
+        button.disabled =
+            false;
+
+        button.innerText =
+            "🧠 Analyze & Select Answer";
+
+    }
+
+}
+
+
+
+// ============================================================
+// RATIONALE PREDICTION
+// ============================================================
+
+async function predictRationale() {
+
+    const image =
+        document.getElementById(
+            "image"
+        ).files[0];
+
+
+    const question =
+        document.getElementById(
+            "question"
+        ).value.trim();
+
+
+    const rationalesText =
+        document.getElementById(
+            "rationales"
+        ).value.trim();
+
+
+    const result =
+        document.getElementById(
+            "rationaleResult"
+        );
+
+
+    const prediction =
+        document.getElementById(
+            "rationalePrediction"
+        );
+
+
+    const raw =
+        document.getElementById(
+            "rationaleRaw"
+        );
+
+
+    const button =
+        document.getElementById(
+            "rationaleButton"
+        );
+
+
+    // --------------------------------------------------------
+    // VALIDATION
+    // --------------------------------------------------------
+
+    if (
+        !image ||
+        !question ||
+        !selectedAnswerText ||
+        !rationalesText
+    ) {
+
+        result.style.display =
+            "block";
+
+        prediction.innerText =
+            "⚠️ Complete Stage 1 first.";
+
+        return;
+
+    }
+
+
+    const rationales =
+        getChoices(
+            rationalesText
+        );
+
+
+    if (
+        rationales.length !== 4
+    ) {
+
+        result.style.display =
+            "block";
+
+        prediction.innerText =
+            "⚠️ Invalid choices";
+
+        raw.innerText =
+            "Please provide exactly 4 rationales separated by |";
+
+        return;
+
+    }
+
+
+    // --------------------------------------------------------
+    // LOADING
+    // --------------------------------------------------------
+
+    button.disabled =
+        true;
+
+    button.innerText =
+        "⏳ Model is thinking...";
+
+
+    result.style.display =
+        "block";
+
+
+    prediction.innerText =
+        "Analyzing rationales...";
+
+
+    raw.innerText =
+        "Please wait.";
+
+
+    // --------------------------------------------------------
+    // FORM DATA
+    // --------------------------------------------------------
+
+    const formData =
+        new FormData();
+
+
+    formData.append(
+        "image",
+        image
+    );
+
+
+    formData.append(
+        "question",
+        question
+    );
+
+
+    formData.append(
+        "selected_answer",
+        selectedAnswerText
+    );
+
+
+    formData.append(
+        "rationales",
+        rationales.join(" | ")
+    );
+
+
+    try {
+
+        const response =
+            await fetch(
+                "http://127.0.0.1:8000/predict-rationale",
+                {
+                    method: "POST",
+                    body: formData
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                JSON.stringify(
+                    data
+                )
+            );
+
+        }
+
+
+        const index =
+            Number(
+                data.prediction
+            );
+
+
+        if (
+            index < 0 ||
+            index > 3
+        ) {
+
+            throw new Error(
+                "Model returned an invalid rationale."
+            );
+
+        }
+
+
+        // ----------------------------------------------------
+        // DISPLAY RATIONALE
+        // ----------------------------------------------------
+
+        prediction.innerText =
+            `${index}. ${rationales[index]}`;
+
+
+        raw.innerText =
+            `Raw model output: ${data.raw_output}`;
+
+
+        // ----------------------------------------------------
+        // FINAL RESULT
+        // ----------------------------------------------------
+
+        document.getElementById(
+            "finalAnswer"
+        ).innerText =
+            `${selectedAnswerIndex}. ${selectedAnswerText}`;
+
+
+        document.getElementById(
+            "finalRationale"
+        ).innerText =
+            `${index}. ${rationales[index]}`;
+
+
+        document.getElementById(
+            "finalResult"
+        ).style.display =
+            "block";
+
+
+        document.getElementById(
+            "finalResult"
+        ).scrollIntoView({
+            behavior: "smooth"
+        });
+
+    }
+
+
+    catch (error) {
+
+        prediction.innerText =
+            "❌ Prediction failed";
+
+
+        raw.innerText =
+            error.message;
+
+
+        console.error(error);
+
+    }
+
+
+    finally {
+
+        button.disabled =
+            false;
+
+        button.innerText =
+            "🔍 Analyze & Select Rationale";
+
+    }
+
+}
+
+</script>
+
+
+</body>
+
+</html>
+```
