@@ -247,15 +247,15 @@ A separate language model could verify whether the selected rationale actually s
 
 ### Architecture
 
-**[ INSERT ARCHITECTURE IMAGE HERE ]**
-
-### Experiment / Results
-
-**[ INSERT WEBSITE IMAGE HERE ]**
+![Final Architecture](images/VCR_system_architecture.png)
 
 ### Project Interface
 
-**[ INSERT WEBSITE IMAGE HERE ]**
+![Project Interface](images/Frontend_Image1.png)
+
+### Project Interface
+
+![Project Interface](images/Frontend_Image2.png)
 
 ---
 
@@ -267,9 +267,6 @@ A separate language model could verify whether the selected rationale actually s
 * **Qwen3-VL-8B-Instruct**
 * **PEFT / LoRA**
 * **BitsAndBytes / 4-bit Quantization**
-* **Jupyter Notebooks**
-* **Google Colab**
-* **Tesla T4 16 GB GPU**
 
 ---
 
