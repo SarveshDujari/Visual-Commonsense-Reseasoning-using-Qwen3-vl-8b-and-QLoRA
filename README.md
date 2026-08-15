@@ -247,15 +247,15 @@ A separate language model could verify whether the selected rationale actually s
 
 ### Architecture
 
-![Final Architecture](images/VCR_system_architecture.png)
+![Final Architecture](Images/VCR_system_architecture.png)
 
 ### Project Interface
 
-![Project Interface](images/Frontend_Image1.png)
+![Project Interface](Images/Frontend_Image1.png)
 
 ### Project Interface
 
-![Project Interface](images/Frontend_Image2.png)
+![Project Interface](Images/Frontend_Image2.png)
 
 ---
 
