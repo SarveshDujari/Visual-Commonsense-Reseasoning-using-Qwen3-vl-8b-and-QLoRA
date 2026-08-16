@@ -157,7 +157,7 @@ These changes allowed the training process to continue reliably within the avail
 
 # Results
 
-The final evaluation was performed on a random 1,000-question sample.
+The QLoRa evaluation was performed on a same 100 data subset.
 
 | Metric       | Before QLoRA | 100Q | 500Q |   1000Q |
 | ------------ | -----------: | ---: | ---: | ------: |
