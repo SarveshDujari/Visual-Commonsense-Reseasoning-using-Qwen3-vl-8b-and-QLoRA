@@ -32,8 +32,6 @@ The final pipeline uses a shared vision-language backbone for both VCR subtasks:
 
 ### Architecture Diagram
 
-**[ INSERT ARCHITECTURE IMAGE HERE ]**
-
 ![Final Architecture](Images/VCR_system_architecture.png)`
 
 ---
