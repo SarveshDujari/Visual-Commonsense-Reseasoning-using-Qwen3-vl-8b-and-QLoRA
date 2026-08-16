@@ -34,8 +34,7 @@ The final pipeline uses a shared vision-language backbone for both VCR subtasks:
 
 **[ INSERT ARCHITECTURE IMAGE HERE ]**
 
-> Add your architecture image here, for example:
-> `![Final Architecture](images/architecture.png)`
+![Final Architecture](Images/VCR_system_architecture.png)`
 
 ---
 
@@ -244,10 +243,6 @@ A separate language model could verify whether the selected rationale actually s
 ---
 
 # Project Screenshots
-
-### Architecture
-
-![Final Architecture](Images/VCR_system_architecture.png)
 
 ### Project Interface
 
