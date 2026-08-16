@@ -219,27 +219,6 @@ A separate language model could verify whether the selected rationale actually s
 
 ---
 
-## Project Structure
-
-```text
-.
-├── 01_visual_impact.ipynb
-├── 02_prompt_impact.ipynb
-├── 03_model_impact.ipynb
-├── qlora_impact_failed.ipynb
-├── qlora_impact_qwen3vl8b.ipynb
-├── memory-safe_v3_100Q.ipynb
-├── memory-safe_v3_500Q.ipynb
-├── memory-safe_v3_1000Q.ipynb
-├── README.md
-└── images/
-    ├── architecture.png
-    ├── experiment_results.png
-    └── project_demo.png
-```
-
----
-
 # Project Screenshots
 
 ### Project Interface
